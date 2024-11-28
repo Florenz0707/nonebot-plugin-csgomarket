@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/pop_up_modle.css">
+    <link rel="stylesheet" type="text/css" href="./css/rank.css">
+    <script type="text/javascript" src="./js/script.js"></script>
+    <script type="text/javascript" src="./js/gsap.min.js"></script>
+    <script type="text/javascript" src="./js/lottie.min.js"></script>
+    <script type="text/javascript" src="./js/echarts.min.js"></script>
+    <script type="text/javascript" src="./js/name.json.js"></script>
+    <title>P-trd</title>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "o55eccvpsb");
+        var page_now = 1;
+    </script>
+</head> 
+
+<body>
+    <div class="_top">
+        <div class="title">
+            <div class="nav_header">
+                <div id="back">
+                    
+                </div>
+                <p id="name">排行榜</p>
+            </div>
+
+
+            <div>
+                <div class="tools">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="nav" class="nav">
+            <div class="selection-indicator"></div>
+            <!-- 光标 -->
+        </div>
+
+
+        <div class="tips">
+            <p>价格(周浮动)</p>
+            <p id="value_name">-</p>
+        </div>
+    </div>
+
+    <div id="container" class="container">
+        <div class="item">
+            <div class="item_header">
+                <div class="rank_name">
+                    <a data-active="top">1</a>
+                    <p>item name</p>
+                </div>
+                <div>
+                    <svg viewBox="64 64 896 896" width="1em">
+                        <path d="M855 160.1l-189.2 23.5c-6.6.8-9.3 8.8-4.7 13.5l54.7 54.7-153.5 153.5a8.03 8.03 0 000 11.3l45.1 45.1c3.1 3.1 8.2 3.1 11.3 0l153.6-153.6 54.7 54.7a7.94 7.94 0 0013.5-4.7L863.9 169a7.9 7.9 0 00-8.9-8.9zM416.6 562.3a8.03 8.03 0 00-11.3 0L251.8 715.9l-54.7-54.7a7.94 7.94 0 00-13.5 4.7L160.1 855c-.6 5.2 3.7 9.5 8.9 8.9l189.2-23.5c6.6-.8 9.3-8.8 4.7-13.5l-54.7-54.7 153.6-153.6c3.1-3.1 3.1-8.2 0-11.3l-45.2-45z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="item_datas">
+                <div>
+                    <p>123.13<up>+123.45%</up></p>
+                    <a>12343</a>
+                </div>
+                <value>123456</value>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item_header">
+                <div class="rank_name">
+                    <a data-active="top">2</a>
+                    <p>item name 1234567 (7654321) name end</p>
+                </div>
+                <div>
+                    <svg viewBox="64 64 896 896" width="1em">
+                        <path d="M855 160.1l-189.2 23.5c-6.6.8-9.3 8.8-4.7 13.5l54.7 54.7-153.5 153.5a8.03 8.03 0 000 11.3l45.1 45.1c3.1 3.1 8.2 3.1 11.3 0l153.6-153.6 54.7 54.7a7.94 7.94 0 0013.5-4.7L863.9 169a7.9 7.9 0 00-8.9-8.9zM416.6 562.3a8.03 8.03 0 00-11.3 0L251.8 715.9l-54.7-54.7a7.94 7.94 0 00-13.5 4.7L160.1 855c-.6 5.2 3.7 9.5 8.9 8.9l189.2-23.5c6.6-.8 9.3-8.8 4.7-13.5l-54.7-54.7 153.6-153.6c3.1-3.1 3.1-8.2 0-11.3l-45.2-45z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="item_datas">
+                <div>
+                    <p>123.13<up>+123.45%</up></p>
+                    <a>12343</a>
+                </div>
+                <float data-active="up">-12.31%</float>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item_header">
+                <div class="rank_name">
+                    <a data-active="top">3</a>
+                    <p>item name 1234567 </p>
+                </div>
+                <div>
+                    <svg viewBox="64 64 896 896" width="1em">
+                        <path d="M855 160.1l-189.2 23.5c-6.6.8-9.3 8.8-4.7 13.5l54.7 54.7-153.5 153.5a8.03 8.03 0 000 11.3l45.1 45.1c3.1 3.1 8.2 3.1 11.3 0l153.6-153.6 54.7 54.7a7.94 7.94 0 0013.5-4.7L863.9 169a7.9 7.9 0 00-8.9-8.9zM416.6 562.3a8.03 8.03 0 00-11.3 0L251.8 715.9l-54.7-54.7a7.94 7.94 0 00-13.5 4.7L160.1 855c-.6 5.2 3.7 9.5 8.9 8.9l189.2-23.5c6.6-.8 9.3-8.8 4.7-13.5l-54.7-54.7 153.6-153.6c3.1-3.1 3.1-8.2 0-11.3l-45.2-45z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="item_datas">
+                <div>
+                    <p>123.13<down>-123.45%</down></p>
+                    <a>12343</a>
+                </div>
+                <float data-active="down">+10%</float>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item_header">
+                <div class="rank_name">
+                    <a>4</a>
+                    <p>item  (7654321) name end</p>
+                </div>
+                <div>
+                    <svg viewBox="64 64 896 896">
+                        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
+                    </svg>
+                    <svg viewBox="64 64 896 896" style="display: none;">
+                        <path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 00140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="item_datas">
+                <div>
+                    <p>123.13<down>-123.45%</down></p>
+                    <a>12343</a>
+                </div>
+                <float data-active="down">+10%</float>
+            </div>
+            <div class="item_infos">
+            </div>
+        </div>
+    </div>
+
+    <div class="loading_anim">
+        <div class="loading" id="loading"></div>
+    </div>
+
+    <div class="mark">
+        <p id="mark">使用Giuthub项目P-trd，数据来源:cs-ob.com</p>
+    </div>
+    <script src="./js/presets.js">//载入预设排行榜</script>
+    <script type="text/javascript">
+        var rank_lists = document.querySelectorAll('.nav p');
+        rank_lists.forEach(function(rank_lists) {
+            rank_lists.addEventListener('click', function() {
+                // 移除其他元素的激活状态
+                rank_lists.forEach(function(item) {
+                    item.setAttribute('data-active', 'false');
+                });
+
+                // 设置当前点击的元素为激活状态
+                rank_lists.setAttribute('data-active', 'true');
+
+                // 移动指示标到当前元素
+                move_indicator(rank_lists);
+
+                // 每次点击后重新设置最后一个导航项的 margin-right
+                set_last_item_margin();
+            });
+        });
+        var now_rank = rank_lists[3]
+    </script>
+    <script src="./js/rank.js"></script>
+    <script type="text/javascript"> init_nav(); </script>
+    <script src="./js/customize.js">//载入自定义排行榜</script>
+</body>
