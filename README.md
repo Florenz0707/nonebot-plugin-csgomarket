@@ -14,5 +14,5 @@
 ## 其他  
 感谢项目 [P-trd](https://github.com/7dul2/P-trd)  
 该插件的主要编写者是 **Zaxprix**, Florenz0707只是小修小补，膜拜大佬。  
-数据来源：cs-orb.com  
+数据来源：cs-ob.com  
 **Version**: 0.1.0
