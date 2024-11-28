@@ -37,7 +37,10 @@ __plugin_meta__ = PluginMetadata(
     usage="使用 /cs.help 获取更多信息",
 
     type="application",
-    extra={},
+
+    homepage="https://github.com/Florenz0707/nonebot-plugin-csmarket",
+
+    supported_adapters={"~onebot.v11"},
 )
 
 # 常量定义
@@ -78,7 +81,7 @@ async def _(event: Event):
     """
     message = """1> cs.market [market] 查询市场大盘情况
 2> cs.search [key1] [key2] 查询某一饰品价格
-3> cs.rank [name] 查看各种榜单"""
+3> cs.rank [rank] 查看各种榜单"""
     await UniMessage.at(event.get_user_id()).text(message).finish(reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
 
 
