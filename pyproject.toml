@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "nonebot-plugin-csmarket"
+version = "0.1.0"
+description = "可以查询 Counter Strike 2 市场信息，包括大盘数据、饰品信息与各类排行榜。"
+authors = ["florenz"]
+readme = "README.md"
+homepage = "https://github.com/Florenz0707/nonebot-plugin-csmarket.git"
+repository = "https://github.com/Florenz0707/nonebot-plugin-csmarket.git"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+nonebot2 = ">=2.4.0"
+jinja2 = ">=3.1.4"
+nonebot_plugin_alconna = ">=0.53.1"
+nonebot_plugin_htmlrender = ">=0.3.5"
+nonebot_plugin_waiter = ">=0.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
