@@ -12,10 +12,10 @@ _✨ CS饰品查询插件 ✨_
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/nonebot-plugin-template.svg" alt="license">
+    <img src="https://img.shields.io/github/license/Florenz0707/nonebot-plugin-csmarket.svg" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/nonebot-plugin-csmarket">
-    <img src="https://img.shields.io/pypi/v/nonebot-plugin-template.svg" alt="pypi">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-csmarket.svg" alt="pypi">
 </a>
 <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
 
