@@ -36,7 +36,7 @@ from jinja2 import Environment, FileSystemLoader
 # 且需含有PluginMetadata
 
 __plugin_meta__ = PluginMetadata(
-    name="CS饰品",
+    name="CSGO_MARKET",
     description="可查询饰品大盘数据，饰品详细信息，饰品涨、跌幅等排行榜",
     usage="使用 cs.help 获取更多信息",
     type="application",
