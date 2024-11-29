@@ -11,9 +11,10 @@ repository = "https://github.com/Florenz0707/nonebot-plugin-csmarket.git"
 python = "^3.11"
 nonebot2 = ">=2.4.0"
 jinja2 = ">=3.1.4"
-nonebot_plugin_alconna = ">=0.53.1"
-nonebot_plugin_htmlrender = ">=0.3.5"
-nonebot_plugin_waiter = ">=0.8.0"
+nonebot-plugin-alconna = ">=0.53.1"
+nonebot-plugin-htmlrender = ">=0.3.5"
+nonebot-plugin-waiter = ">=0.8.0"
+nonebot-plugin-uninfo = ">=0.6.0"
 
 
 [build-system]
