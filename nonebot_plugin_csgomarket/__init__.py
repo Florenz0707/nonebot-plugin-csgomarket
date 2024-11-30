@@ -81,7 +81,7 @@ async def _(event: Event):
     message = """1> cs.market 查询市场大盘情况
 2> cs.search 查询某一饰品价格
 3> cs.rank 查看各种榜单"""
-    await UniMessage.at(event.get_user_id()).text(message).finish(reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
+    await UniMessage.text(message).finish(reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
 
 
 # CS大盘数据命令
@@ -94,14 +94,14 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
     name = arg.extract_plain_text().strip()  # 去除多余空格
 
     if name == "":
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请输入要查询的市场名!\n可查询：BUFF|悠悠有品|IGXE|C5\n示例： cs.market BUFF").finish(
+        await UniMessage.text(
+            "请输入要查询的市场名!\n可查询：BUFF|悠悠有品|IGXE|C5\n示例： cs.market BUFF").finish(
             reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
     # 匹配输入名称
     market_type = next((i for i, market in enumerate(MARKETS) if fuzzy_case_match(name, market)), None)
     if market_type is None:
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请输入正确的市场名!\n可查询：BUFF|悠悠有品|IGXE|C5\n示例： cs.market BUFF").finish(
+        await UniMessage.text(
+            "请输入正确的市场名!\n可查询：BUFF|悠悠有品|IGXE|C5\n示例： cs.market BUFF").finish(
             reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
     # 加载模板
     env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
@@ -124,21 +124,21 @@ cs_market_search = on_command("cs.search", block=True)
 async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
     name = arg.extract_plain_text().strip()
     if len(name) == 0:
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请告诉我想要查询哪件商品吧").send(reply_to=True)
+        await UniMessage.text(
+            "请告诉我想要查询哪件商品吧").send(reply_to=True)
     elif len(name) < 3:
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请输入至少三个字符哦").send(reply_to=True)
+        await UniMessage.text(
+            "请输入至少三个字符哦").send(reply_to=True)
     else:
         # 根据关键词模糊搜索可能的商品信息
         goods_list = fetch_by_name(name)
         if goods_list is None:
-            await UniMessage.at(event.get_user_id()).text("\n啊嘞？没找到哦~").finish(reply_to=True)
+            await UniMessage.text("啊嘞？没找到哦~").finish(reply_to=True)
         selected_list = ""
         for i in range(len(goods_list)):
             selected_list += f"{i + 1}: {goods_list[i]}\n"
-        await UniMessage.at(event.get_user_id()).text(
-            f"\n{selected_list}上面已为您展示搜索到的商品，发送对应的序号来选择吧！\n(限时一分钟，发送'0'取消选择)").send(reply_to=True)
+        await UniMessage.text(
+            f"{selected_list}上面已为您展示搜索到的商品，发送对应的序号来选择吧！\n(限时一分钟，发送'0'取消选择)").send(reply_to=True)
 
         # 请求进一步确认
         @waiter(waits=["message"], keep_session=True)
@@ -147,17 +147,17 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
 
         resp = await check.wait(timeout=60)
         if resp is None:
-            await UniMessage.at(event.get_user_id()).text(
-                "\n什么嘛！根本没在听我讲话！我走了！").finish(reply_to=True)
+            await UniMessage.text(
+                "什么嘛！根本没在听我讲话！我走了！").finish(reply_to=True)
         if not resp.isdigit() or int(resp) < 0 or int(resp) > len(goods_list):
-            await UniMessage.at(event.get_user_id()).text(
+            await UniMessage.text(
                 "\n没听懂哦！可以重新调用命令哦~").finish(reply_to=True)
         if int(resp) == 0:
-            await UniMessage.at(event.get_user_id()).text(
-                "\n已取消选择！有什么需求可以找我哦~").finish(reply_to=True)
+            await UniMessage.text(
+                "已取消选择！有什么需求可以找我哦~").finish(reply_to=True)
 
-        await UniMessage.at(event.get_user_id()).text(
-            "\n收到啦~正在查询中......").send()
+        await UniMessage.text(
+            "收到啦~正在查询中......").send()
         # 生成商品信息截图
         env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
         template = env.get_template("item.html.jinja2")
@@ -190,14 +190,14 @@ def parse_input(input_str):
 async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
     name = arg.extract_plain_text().strip()
     if name == "":
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请输入要查询的榜单！ \n可查询排行榜：周涨幅|周跌幅|周热销|周热租\n示例： cs.rank 周涨幅").finish(
+        await UniMessage.text(
+            "请输入要查询的榜单！ \n可查询排行榜：周涨幅|周跌幅|周热销|周热租\n示例： cs.rank 周涨幅").finish(
             reply_to=True)
 
     rank_type, page_num = parse_input(name)  # 解析输入参数
     if rank_type not in RANK_TYPES:
-        await UniMessage.at(event.get_user_id()).text(
-            "\n请输入要正确的榜单名称！ \n可查询排行榜：周涨幅|周跌幅|周热销|周热租\n示例： cs.rank 周涨幅").finish(
+        await UniMessage.text(
+            "请输入要正确的榜单名称！ \n可查询排行榜：周涨幅|周跌幅|周热销|周热租\n示例： cs.rank 周涨幅").finish(
             reply_to=True)
 
     # 你问我为什么这么写？html里面是用的列表存储排行榜，传入下标来指定要查询的排行榜
