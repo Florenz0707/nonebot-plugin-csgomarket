@@ -30,8 +30,8 @@ import uuid
 import re
 import os
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
-
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+import aiofiles
 # 模块导入顺序为nonebot包，nonebot插件，子模块，其他模块
 # 且需含有PluginMetadata
 
@@ -41,6 +41,7 @@ __plugin_meta__ = PluginMetadata(
     usage="使用 cs.help 获取更多信息",
     type="application",
     homepage="https://github.com/Florenz0707/nonebot-plugin-csmarket",
+    supported_adapters={"~onebot.v11"}
 )
 
 # 常量定义
@@ -48,6 +49,11 @@ MARKETS = ["BUFF", "悠悠有品", "C5", "IGXE"]
 RANK_TYPES = ["周涨幅", "周跌幅", "周热销", "周热租"]
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
+env = Environment(
+    loader=FileSystemLoader(str(TEMPLATE_DIR)),
+    autoescape=select_autoescape(["html", "xml"]),
+    enable_async=True  # 启用异步渲染
+)
 # 常用函数
 
 
@@ -104,13 +110,12 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
             "请输入正确的市场名!\n可查询：BUFF|悠悠有品|IGXE|C5\n示例： cs.market BUFF").finish(
             reply_to=True)  # 机器人消息格式为回复且在第一行at用户，在第二行接上其他消息
     # 加载模板
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
     template = env.get_template("markets.html.jinja2")
-    rendered_html = template.render(page_now=market_type)  # 传入参数并生成html
+    rendered_html = await template.render_async(page_now=market_type)  # 传入参数并生成html
     new_html = generate_hex_filename()  # 生成随机文件名
     output_path = TEMPLATE_DIR / new_html  # 生成路径
-    with open(output_path, "w", encoding="utf-8") as file:
-        file.write(rendered_html)  # 写文件
+    async with aiofiles.open(output_path, "w", encoding="utf-8") as f:
+        await f.write(rendered_html)
 
     async with get_new_page(viewport={"width": 500, "height": 300}) as page:
         await take_screenshot(page, output_path)  # 截图
@@ -159,13 +164,12 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
         await UniMessage.text(
             "收到啦~正在查询中......").send()
         # 生成商品信息截图
-        env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
         template = env.get_template("item.html.jinja2")
-        rendered_html = template.render(data_value=goods_list[int(resp) - 1])
+        rendered_html = await template.render_async(data_value=goods_list[int(resp) - 1])
         new_html = generate_hex_filename()
         output_path = TEMPLATE_DIR / new_html
-        with open(output_path, "w", encoding="utf-8") as file:
-            file.write(rendered_html)
+        async with aiofiles.open(output_path, "w", encoding="utf-8") as f:
+            await f.write(rendered_html)
 
         async with get_new_page(viewport={"width": 750, "height": 900}) as page:
             await take_screenshot(page, output_path)
@@ -203,13 +207,12 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
     # 你问我为什么这么写？html里面是用的列表存储排行榜，传入下标来指定要查询的排行榜
     rank_type_num = RANK_TYPES.index(rank_type)
     # 加载模板
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
     template = env.get_template("rank.html.jinja2")
-    rendered_html = template.render(rank_type=rank_type_num, page=page_num)
+    rendered_html = await template.render_async(rank_type=rank_type_num, page=page_num)
     new_html = generate_hex_filename()
     output_path = TEMPLATE_DIR / new_html
-    with open(output_path, "w", encoding="utf-8") as file:  # 需改为异步操作
-        file.write(rendered_html)
+    async with aiofiles.open(output_path, "w", encoding="utf-8") as f:
+        await f.write(rendered_html)
 
     async with get_new_page(viewport={"width": 650, "height": 900}) as page:
         await take_screenshot(page, output_path)
