@@ -5,7 +5,7 @@ from nonebot import on_command
 from nonebot.adapters import Message, Event
 from nonebot.matcher import Matcher
 from nonebot.params import CommandArg
-from nonebot.plugin import PluginMetadata
+from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
 # 导入 nonebot 插件
 require("nonebot_plugin_waiter")
@@ -41,7 +41,9 @@ __plugin_meta__ = PluginMetadata(
     usage="使用 cs.help 获取更多信息",
     type="application",
     homepage="https://github.com/Florenz0707/nonebot-plugin-csmarket",
-    supported_adapters={"~onebot.v11"}
+    supported_adapters=inherit_supported_adapters(
+        "nonebot_plugin_alconna", "nonebot_plugin_uninfo"
+    ),
 )
 
 # 常量定义
