@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-csgomarket"
-version = "0.1.5"
+version = "0.1.7"
 description = "可以查询 Counter Strike 2 市场信息，包括大盘数据、饰品信息与各类排行榜。"
 authors = ["florenz", "zaxprib"]
 readme = "README.md"
@@ -14,7 +14,6 @@ jinja2 = ">=3.1.4"
 nonebot-plugin-alconna = ">=0.53.1"
 nonebot-plugin-htmlrender = ">=0.3.5"
 nonebot-plugin-waiter = ">=0.8.0"
-nonebot-plugin-uninfo = ">=0.6.0"
 
 
 [build-system]
