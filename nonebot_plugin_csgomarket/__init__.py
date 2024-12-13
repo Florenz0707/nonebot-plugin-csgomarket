@@ -42,7 +42,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     homepage="https://github.com/Florenz0707/nonebot-plugin-csmarket",
     supported_adapters=inherit_supported_adapters(
-        "nonebot_plugin_alconna", "nonebot_plugin_uninfo"
+        "nonebot_plugin_alconna"
     ),
 )
 
