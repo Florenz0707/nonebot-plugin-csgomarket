@@ -6,7 +6,7 @@
 
 <div align="center">
 
-# nonebot-plugin-csmarket
+# nonebot-plugin-csgomarket
 
 _✨ CS饰品查询插件 ✨_
 
@@ -31,7 +31,7 @@ _✨ CS饰品查询插件 ✨_
 <summary>使用 nb-cli 安装</summary>
 在 nonebot2 项目的根目录下打开命令行, 输入以下指令即可安装
 
-    nb plugin install nonebot-plugin-csmarket
+    nb plugin install nonebot-plugin-csgomarket
 
 </details>
 
@@ -42,27 +42,27 @@ _✨ CS饰品查询插件 ✨_
 <details>
 <summary>pip</summary>
 
-    pip install nonebot-plugin-csmarket
+    pip install nonebot-plugin-csgomarket
 </details>
 <details>
 <summary>pdm</summary>
 
-    pdm add nonebot-plugin-csmarket
+    pdm add nonebot-plugin-csgomarket
 </details>
 <details>
 <summary>poetry</summary>
 
-    poetry add nonebot-plugin-csmarket
+    poetry add nonebot-plugin-csgomarket
 </details>
 <details>
 <summary>conda</summary>
 
-    conda install nonebot-plugin-csmarket
+    conda install nonebot-plugin-csgomarket
 </details>
 
 打开 nonebot2 项目根目录下的 `pyproject.toml` 文件, 在 `[tool.nonebot]` 部分追加写入
 
-    plugins = ["nonebot_plugin_csmarket"]
+    plugins = ["nonebot_plugin_csgomarket"]
 
 </details>
 
@@ -84,4 +84,4 @@ _✨ CS饰品查询插件 ✨_
 本项目由 [P-trd](https://github.com/7dul2/P-trd)  移植而来
 该插件的主要编写者是 **Zaxpris**, Florenz0707只是小修小补，膜拜大佬。  
 数据来源：cs-ob.com  
-**Version**: 0.1.0
+**Version**: 0.1.8

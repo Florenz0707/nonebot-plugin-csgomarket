@@ -36,7 +36,7 @@ import aiofiles
 # 且需含有PluginMetadata
 
 __plugin_meta__ = PluginMetadata(
-    name="nonebot-plugin-csmarket",
+    name="nonebot-plugin-csgomarket",
     description="可查询饰品大盘数据，饰品详细信息，饰品涨、跌幅等排行榜",
     usage="使用 cs.help 获取更多信息",
     type="application",
