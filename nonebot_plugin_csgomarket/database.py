@@ -2,9 +2,11 @@ from .items import item_names
 
 goods = list(item_names.keys())
 
+
 def exact_match(keyword):
     lower_case_keywords = keyword.lower().split()
     return [item for item in goods if all(kw in item.lower() for kw in lower_case_keywords)]
+
 
 def jaro(s1, s2):
     s1, s2 = s1.lower(), s2.lower()
@@ -45,12 +47,14 @@ def jaro(s1, s2):
     transpositions /= 2
     return (matches / s1_len + matches / s2_len + (matches - transpositions) / matches) / 3.0
 
+
 def jaro_match(keyword, threshold=0.7):
     return sorted(
         [item for item in goods if jaro(item, keyword) > threshold],
         key=lambda item: jaro(item, keyword),
         reverse=True
     )
+
 
 def fetch_by_name(query):
     query = query.strip()
@@ -63,4 +67,3 @@ def fetch_by_name(query):
 
     fuzzy_results = jaro_match(query)
     return fuzzy_results
-

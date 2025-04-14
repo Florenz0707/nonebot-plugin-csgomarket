@@ -11,7 +11,6 @@ from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 require("nonebot_plugin_waiter")
 from nonebot_plugin_waiter import waiter, prompt, suggest
 
-
 require("nonebot_plugin_alconna")
 from nonebot_plugin_alconna import UniMessage
 
@@ -32,6 +31,7 @@ import os
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import aiofiles
+
 # 模块导入顺序为nonebot包，nonebot插件，子模块，其他模块
 # 且需含有PluginMetadata
 
@@ -56,11 +56,13 @@ env = Environment(
     autoescape=select_autoescape(["html", "xml"]),
     enable_async=True  # 启用异步渲染
 )
+
+
 # 常用函数
 
 
 # 生成随机文件名
-def generate_hex_filename() ->str:
+def generate_hex_filename() -> str:
     return f"{uuid.uuid4().hex}.html"
 
 
@@ -145,7 +147,8 @@ async def _(matcher: Matcher, event: Event, arg: Message = CommandArg()):
         for i in range(len(goods_list)):
             selected_list += f"{i + 1}: {goods_list[i]}\n"
         await UniMessage.text(
-            f"{selected_list}上面已为您展示搜索到的商品，发送对应的序号来选择吧！\n(限时一分钟，发送'0'取消选择)").send(reply_to=True)
+            f"{selected_list}上面已为您展示搜索到的商品，发送对应的序号来选择吧！\n(限时一分钟，发送'0'取消选择)").send(
+            reply_to=True)
 
         # 请求进一步确认
         @waiter(waits=["message"], keep_session=True)

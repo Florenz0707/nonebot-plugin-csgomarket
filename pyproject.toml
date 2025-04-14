@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-csmarket"
-version = "0.1.8"
+version = "0.1.9"
 description = "可以查询 Counter Strike 2 市场信息，包括大盘数据、饰品信息与各类排行榜。"
 authors = ["florenz", "zaxprib"]
 readme = "README.md"
