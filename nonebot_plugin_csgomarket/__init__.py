@@ -40,7 +40,7 @@ __plugin_meta__ = PluginMetadata(
     description="可查询饰品大盘数据，饰品详细信息，饰品涨、跌幅等排行榜",
     usage="使用 cs.help 获取更多信息",
     type="application",
-    homepage="https://github.com/Florenz0707/nonebot-plugin-csmarket",
+    homepage="https://github.com/Florenz0707/nonebot-plugin-csgomarket",
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna"
     ),
