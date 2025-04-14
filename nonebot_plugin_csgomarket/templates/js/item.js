@@ -1,5 +1,48 @@
 var all_resps = {};
 
+// NOTE: 以下函数需要一个全局可用的 md5 函数。
+// 您可能需要引入一个库，例如 blueimp-md5：
+// <script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js"></script>
+// 或者确保执行环境提供了该函数。
+
+function generate_timestamp_js_for_param() {
+    // 生成用于 URL 参数的 12+1 位时间戳（如果其他地方需要）
+    const timestampMs = new Date().getTime();
+    const timestampStr12 = String(timestampMs).substring(0, 12);
+    let checksum = 0;
+    for (let i = 0; i < timestampStr12.length; i++) {
+        checksum += parseInt(timestampStr12[i], 10);
+    }
+    checksum %= 10;
+    return timestampStr12 + String(checksum);
+}
+
+function generate_auth_headers_js() {
+    // 根据 Python 逻辑使用原始时间戳生成头部信息
+    const rawTimestampMs = new Date().getTime();
+    const rawTimestampStr = String(rawTimestampMs);
+
+    // 此时间戳用于 'Timestamp' 头
+    const headerTimestamp = rawTimestampStr;
+
+    // 使用 MD5 生成 'Auth' 令牌
+    let authToken = ""; // 默认为空字符串
+    if (typeof md5 !== 'function') {
+        console.error("MD5 函数不可用。无法生成 auth 令牌。");
+        // 返回占位符或空值，以避免立即中断执行
+    } else {
+        try {
+            const firstHash = md5(rawTimestampStr);
+            authToken = md5(firstHash + "pc*&bQ2@mkvt");
+        } catch (e) {
+            console.error("生成 auth 令牌时出错:", e);
+        }
+    }
+
+
+    return { headerTimestamp, authToken };
+}
+
 function sendHttpRequest(url, method, data = {},key) {
     // 创建 XMLHttpRequest 对象
     var xhr = new XMLHttpRequest();
@@ -7,13 +50,35 @@ function sendHttpRequest(url, method, data = {},key) {
     // 将数据转换为字符串形式
     var dataString = JSON.stringify(data);
 
-    // 打开请求
+    // 根据 Python pre_send_handler 逻辑处理 URL 或参数中的 timestamp
+    const timestampParam = generate_timestamp_js_for_param();
+    const methodUpper = method.toUpperCase();
+
+    if (methodUpper === 'GET') {
+        // 对于 GET 请求，将 timestamp 添加到 URL 查询参数
+        // (注意：这里假设 URL 可能已有查询参数，需要正确处理)
+        const separator = url.includes('?') ? '&' : '?';
+        url = `${url}${separator}timestamp=${timestampParam}`;
+        // 如果数据对象 'data' 用于 GET 请求的参数，则也应在此处处理，
+        // 但标准的 GET 请求通常不通过 body 发送数据，所以我们假设 'data' 主要用于 POST。
+        // 如果 'data' 应该成为 GET 的查询参数，需要额外逻辑将其转换为查询字符串并附加到 URL。
+
+    } else if (methodUpper === 'POST') {
+        // 对于 POST 请求，将 timestamp 添加到 URL
+        const separator = url.includes('?') ? '&' : '?';
+        url = `${url}${separator}timestamp=${timestampParam}`;
+    }
+
+    // 打开请求 (使用可能已修改的 URL)
     xhr.open(method, url, true);
 
     // 设置请求头
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.setRequestHeader("timestamp", "1722125215870");
-    xhr.setRequestHeader("auth", "a75970b8947d00e9aff38802caeb784c");
+
+    // 基于 Python 逻辑生成并设置动态认证头
+    const { headerTimestamp, authToken } = generate_auth_headers_js();
+    xhr.setRequestHeader("timestamp", headerTimestamp);
+    xhr.setRequestHeader("auth", authToken);
 
     // 发送请求
     xhr.send(dataString);
