@@ -84,4 +84,4 @@ _✨ CS饰品查询插件 ✨_
 本项目由 [P-trd](https://github.com/7dul2/P-trd)  移植而来
 该插件的主要编写者是 **Zaxpris**, Florenz0707只是小修小补，膜拜大佬。  
 数据来源：cs-ob.com  
-**Version**: 0.1.9
+**Version**: 0.2.1
